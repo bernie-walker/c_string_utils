@@ -9,6 +9,33 @@ String_array_ptr init_string_array(size_t length)
   return string_array;
 }
 
+String_array_ptr resize_array(String_array_ptr string_array, size_t length)
+{
+  String_array_ptr resized_array = malloc(sizeof(String_array));
+  resized_array->length = length;
+  resized_array->strings = realloc(string_array->strings, length);
+
+  if (resized_array->strings == NULL)
+  {
+    NO_MEMORY_ERROR;
+    exit(1);
+  }
+
+  free(string_array->strings);
+  free(string_array);
+  return resized_array;
+}
+
+void print_strings(Char_ptr message, String_array_ptr strings)
+{
+  printf("%s\n", message);
+  for (size_t i = 0; i < strings->length; i++)
+  {
+    printf("%s\n", strings->strings[i]);
+  }
+  printf("\n");
+}
+
 size_t count_chars(Char_ptr string)
 {
   size_t count = 0;
@@ -36,14 +63,4 @@ Char_ptr slice(Char_ptr string, size_t count)
   sliced_string[count + 1] = '\0';
 
   return sliced_string;
-}
-
-void print_strings(Char_ptr message, String_array_ptr strings)
-{
-  printf("%s\n", message);
-  for (size_t i = 0; i < strings->length; i++)
-  {
-    printf("%s\n", strings->strings[i]);
-  }
-  printf("\n");
 }

@@ -4,6 +4,8 @@
 #ifndef __STRING_H_
 #define __STRING_H_
 
+#define NO_MEMORY_ERROR printf("Insufficient memory\n")
+
 typedef char *Char_ptr;
 
 typedef struct
@@ -16,10 +18,12 @@ typedef String_array *String_array_ptr;
 
 String_array_ptr init_string_array(size_t);
 
+String_array_ptr resize_array(String_array_ptr, size_t);
+
+void print_strings(Char_ptr, String_array_ptr);
+
 size_t count_chars(Char_ptr);
 
 Char_ptr slice(Char_ptr, size_t);
-
-void print_strings(Char_ptr, String_array_ptr);
 
 #endif // !__STRING_H_
