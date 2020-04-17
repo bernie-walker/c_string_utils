@@ -5,7 +5,7 @@ int main(void)
 {
   char name[] = "Bernard Nehal Dcunha";
 
-  printf("Number of characters in the name are %ld\n", count_chars(name));
+  printf("Slice name is -%s-\n", slice(name, 7));
 
   return 0;
 }
