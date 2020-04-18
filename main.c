@@ -11,5 +11,9 @@ int main(void)
 
   print_strings("Strings Array", string_array);
 
+  char x[] = "bernie-walker";
+
+  printf("%s\n", slice(x, 2, 8));
+
   return 0;
 }
