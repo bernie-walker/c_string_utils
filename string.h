@@ -20,6 +20,8 @@ String_array_ptr init_string_array(size_t);
 
 String_array_ptr resize_array(String_array_ptr, size_t);
 
+String_array_ptr get_custom_string_array(Char_ptr *, size_t);
+
 void print_strings(Char_ptr, String_array_ptr);
 
 size_t count_chars(Char_ptr);

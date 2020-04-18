@@ -26,6 +26,22 @@ String_array_ptr resize_array(String_array_ptr string_array, size_t length)
   return resized_array;
 }
 
+String_array_ptr get_custom_string_array(Char_ptr *strings, size_t length)
+{
+  String_array_ptr custom_string_array = malloc(sizeof(String_array));
+  custom_string_array->length = length;
+  custom_string_array->strings = realloc(strings, length);
+
+  if (custom_string_array->strings == NULL)
+  {
+    NO_MEMORY_ERROR;
+    exit(1);
+  }
+
+  free(strings);
+  return custom_string_array;
+}
+
 void print_strings(Char_ptr message, String_array_ptr strings)
 {
   printf("%s\n", message);
