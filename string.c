@@ -87,3 +87,37 @@ String_array_ptr split(Char_ptr string, char delimiter)
 
   return get_custom_string_array(result, result_index);
 }
+
+String_array_ptr string_array_from(Char_ptr *strings, size_t length)
+{
+  String_array_ptr string_array = init_string_array(length);
+
+  for (size_t i = 0; i < length; i++)
+  {
+    string_array->strings[i] = strings[i];
+  }
+
+  return string_array;
+}
+
+String_array_ptr split_no_realloc(Char_ptr string, char delimiter)
+{
+  size_t length_of_string = count_chars(string);
+  Char_ptr result[length_of_string];
+  size_t prev_index = 0, result_index = 0;
+
+  for (size_t i = 0; i < length_of_string; i++)
+  {
+    if (string[i] == delimiter)
+    {
+      result[result_index] = slice(string, prev_index, i);
+      prev_index = i + 1;
+      ++result_index;
+    }
+  }
+
+  result[result_index] = slice(string, prev_index, length_of_string);
+  ++result_index;
+
+  return string_array_from(result, result_index);
+}

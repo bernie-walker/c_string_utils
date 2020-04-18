@@ -28,4 +28,6 @@ Char_ptr slice(Char_ptr, size_t, size_t);
 
 String_array_ptr split(Char_ptr, char);
 
+String_array_ptr split_no_realloc(Char_ptr, char);
+
 #endif // !__STRING_H_
