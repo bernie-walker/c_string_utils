@@ -3,17 +3,8 @@
 
 int main(void)
 {
-  String_array_ptr string_array = init_string_array(3);
-
-  string_array->strings[0] = "this";
-  string_array->strings[1] = "is";
-  string_array->strings[2] = "it";
-
-  print_strings("Strings Array", string_array);
-
-  char x[] = "bernie-walker";
-
-  printf("%s\n", slice(x, 2, 8));
-
+  String_array_ptr x = split("this,is,i,t", ',');
+  print_strings("Split string", x);
+  printf("%ld\n", x->length);
   return 0;
 }

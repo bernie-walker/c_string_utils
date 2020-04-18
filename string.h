@@ -26,4 +26,6 @@ size_t count_chars(Char_ptr);
 
 Char_ptr slice(Char_ptr, size_t, size_t);
 
+String_array_ptr split(Char_ptr, char);
+
 #endif // !__STRING_H_

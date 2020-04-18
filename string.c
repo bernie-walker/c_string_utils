@@ -13,7 +13,7 @@ String_array_ptr resize_array(String_array_ptr string_array, size_t length)
 {
   String_array_ptr resized_array = malloc(sizeof(String_array));
   resized_array->length = length;
-  resized_array->strings = realloc(string_array->strings, length);
+  resized_array->strings = realloc(string_array->strings, (8 * length));
 
   if (resized_array->strings == NULL)
   {
@@ -21,7 +21,7 @@ String_array_ptr resize_array(String_array_ptr string_array, size_t length)
     exit(1);
   }
 
-  free(string_array->strings);
+  // free(string_array->strings);
   free(string_array);
   return resized_array;
 }
@@ -65,4 +65,26 @@ Char_ptr slice(Char_ptr string, size_t from, size_t to)
   sliced_string[slice_index] = '\0';
 
   return sliced_string;
+}
+
+String_array_ptr split(Char_ptr string, char delimiter)
+{
+  size_t length_of_string = count_chars(string);
+  String_array_ptr result = init_string_array(length_of_string);
+  size_t prev_index = 0, result_index = 0;
+
+  for (size_t i = 0; i < length_of_string; i++)
+  {
+    if (string[i] == delimiter)
+    {
+      result->strings[result_index] = slice(string, prev_index, i);
+      prev_index = i + 1;
+      ++result_index;
+    }
+  }
+
+  result->strings[result_index] = slice(string, prev_index, length_of_string);
+  ++result_index;
+
+  return resize_array(result, result_index);
 }
