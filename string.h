@@ -18,8 +18,6 @@ typedef String_array *String_array_ptr;
 
 String_array_ptr init_string_array(size_t);
 
-String_array_ptr get_custom_string_array(Char_ptr *, size_t);
-
 void print_strings(Char_ptr, String_array_ptr);
 
 size_t count_chars(Char_ptr);
@@ -27,7 +25,5 @@ size_t count_chars(Char_ptr);
 Char_ptr slice(Char_ptr, size_t, size_t);
 
 String_array_ptr split(Char_ptr, char);
-
-String_array_ptr split_no_realloc(Char_ptr, char);
 
 #endif // !__STRING_H_

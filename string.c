@@ -9,20 +9,16 @@ String_array_ptr init_string_array(size_t length)
   return string_array;
 }
 
-String_array_ptr get_custom_string_array(Char_ptr *strings, size_t length)
+String_array_ptr string_array_from(Char_ptr *strings, size_t length)
 {
-  String_array_ptr custom_string_array = malloc(sizeof(String_array));
-  custom_string_array->length = length;
-  custom_string_array->strings = realloc(strings, (sizeof(Char_ptr) * length));
+  String_array_ptr string_array = init_string_array(length);
 
-  if (custom_string_array->strings == NULL)
+  for (size_t i = 0; i < length; i++)
   {
-    NO_MEMORY_ERROR;
-    exit(1);
+    string_array->strings[i] = strings[i];
   }
 
-  free(strings);
-  return custom_string_array;
+  return string_array;
 }
 
 void print_strings(Char_ptr message, String_array_ptr strings)
@@ -63,40 +59,6 @@ Char_ptr slice(Char_ptr string, size_t from, size_t to)
 }
 
 String_array_ptr split(Char_ptr string, char delimiter)
-{
-  size_t length_of_string = count_chars(string);
-  Char_ptr *result = malloc(sizeof(Char_ptr) * length_of_string);
-  size_t prev_index = 0, result_index = 0;
-
-  for (size_t i = 0; i < length_of_string; i++)
-  {
-    if (string[i] == delimiter)
-    {
-      result[result_index] = slice(string, prev_index, i);
-      prev_index = i + 1;
-      ++result_index;
-    }
-  }
-
-  result[result_index] = slice(string, prev_index, length_of_string);
-  ++result_index;
-
-  return get_custom_string_array(result, result_index);
-}
-
-String_array_ptr string_array_from(Char_ptr *strings, size_t length)
-{
-  String_array_ptr string_array = init_string_array(length);
-
-  for (size_t i = 0; i < length; i++)
-  {
-    string_array->strings[i] = strings[i];
-  }
-
-  return string_array;
-}
-
-String_array_ptr split_no_realloc(Char_ptr string, char delimiter)
 {
   size_t length_of_string = count_chars(string);
   Char_ptr result[length_of_string];
